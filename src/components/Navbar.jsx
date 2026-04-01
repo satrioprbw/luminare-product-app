@@ -1,7 +1,10 @@
 import useAuthStore from "../store/useAuthStore";
+import UseProductStore from "../store/useProductStore";
 
 const Navbar = () => {
   const user = useAuthStore((state) => state.user);
+  const search = UseProductStore((state) => state.search);
+  const setSearch = UseProductStore((state) => state.setSearch);
   return (
     <div className="h-16 bg-white border-b flex items-center justify-between px-5">
       <div className="w-80 flex items-center border rounded-2xl px-3  gap-3 bg-gray-50">
@@ -9,6 +12,8 @@ const Navbar = () => {
         <input
           type="text"
           placeholder="Search..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
           className="text-sm w-full py-1 outline-none bg-transparent"
         />
       </div>

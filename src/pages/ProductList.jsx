@@ -1,10 +1,16 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Layout from "../components/Layout";
+import useProductStore from "../store/useProductStore";
 
 const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
+  const search = useProductStore((state) => state.search);
+  const filteredProducts = products.filter((product) =>
+    product.title.toLowerCase().includes(search.toLowerCase()),
+  );
 
   const fetchProducts = async () => {
     try {
@@ -28,7 +34,7 @@ const ProductList = () => {
 
   return (
     <Layout>
-         <h1 className="mb-4 text-2xl font-semibold text-primary">Product List</h1>
+      <h1 className="mb-4 text-2xl font-semibold text-primary">Product List</h1>
       <div className="max-w-5xl bg-white rounded-2xl border border-secondary overflow-hidden">
         <table className="w-full">
           <thead>
@@ -40,8 +46,11 @@ const ProductList = () => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => (
-              <tr key={product.id} className="text-left text-sm even:bg-light/20">
+            {filteredProducts.map((product) => (
+              <tr
+                key={product.id}
+                className="text-left text-sm even:bg-light/20"
+              >
                 <td className="p-3">{product.title}</td>
                 <td className="p-3">{product.category}</td>
                 <td className="p-3">{product.price}</td>
