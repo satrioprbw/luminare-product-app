@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import useAuthStore from "../store/useAuthStore";
 
 const Sidebar = () => {
   const logout = useAuthStore((state) => state.logout);
+  const location = useLocation();
   return (
     <div className="w-50 bg-primary text-white p-5 flex flex-col">
       <Link to="/" className="mb-8 text-accent text-4xl italic">
@@ -10,10 +11,16 @@ const Sidebar = () => {
       </Link>
 
       <nav className="flex flex-col gap-4">
-        <Link className="p-2 rounded hover:bg-secondary" to="/">
+        <Link
+          className={`p-2 rounded ${location.pathname === "/" ? "bg-secondary" : "hover:bg-secondary"}`}
+          to="/"
+        >
           Home
         </Link>
-        <Link className="p-2 rounded hover:bg-secondary" to="/products">
+        <Link
+          className={`p-2 rounded ${location.pathname.startsWith("/products") ? "bg-secondary" : "hover:bg-secondary"}`}
+          to="/products"
+        >
           Product
         </Link>
       </nav>
