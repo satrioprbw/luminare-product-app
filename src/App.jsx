@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import useAuthStore from "./store/useAuthStore";
 import ProductList from "./pages/ProductList";
 import ProductDetail from "./pages/ProductDetail";
+import ProductAdd from "./pages/ProductAdd";
 
 function App() {
   const user = useAuthStore((state) => state.user);
@@ -19,6 +20,10 @@ function App() {
         <Route
           path="/products/:id"
           element={user ? <ProductDetail /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/products/add"
+          element={user ? <ProductAdd /> : <Navigate to="/login" />}
         />
       </Routes>
     </BrowserRouter>

@@ -49,40 +49,45 @@ const ProductList = () => {
 
   return (
     <Layout>
-      <h1 className="mb-4 text-2xl font-semibold text-primary border-b border-primary pb-4">
-        Product List
-      </h1>
-      <div className="max-w-5xl mx-auto bg-white rounded-2xl border border-secondary overflow-hidden">
-        <table className="w-full">
-          <thead>
-            <tr className="border-b text-left bg-secondary text-white">
-              <th className="p-3">Title</th>
-              <th className="p-3">Category</th>
-              <th className="p-3">Price</th>
-              <th className="p-3">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredProducts.map((product) => (
-              <tr
-                key={product.id}
-                className="text-left text-sm even:bg-light/20"
-              >
-                <td className="p-3">{product.title}</td>
-                <td className="p-3">{product.category}</td>
-                <td className="p-3">${product.price}</td>
-                <td className="p-3">
-                  <Link
-                    className="text-accent font-semibold"
-                    to={`/products/${product.id}`}
-                  >
-                    View
-                  </Link>
-                </td>
+      <div className="max-w-5xl mx-auto">
+        <div className="flex justify-between items-center pb-8">
+          <h1 className="text-2xl font-semibold text-primary">Product List</h1>
+          <Link to="/products/add" className="text-bold text-lg text-secondary">
+            + Add New Product
+          </Link>
+        </div>
+        <div className=" bg-white rounded-2xl border border-secondary overflow-hidden">
+          <table className="w-full">
+            <thead>
+              <tr className="border-b text-left bg-secondary text-white">
+                <th className="p-3">Title</th>
+                <th className="p-3">Category</th>
+                <th className="p-3">Price</th>
+                <th className="p-3">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {filteredProducts.map((product) => (
+                <tr
+                  key={product.id}
+                  className="text-left text-sm even:bg-light/20"
+                >
+                  <td className="p-3">{product.title}</td>
+                  <td className="p-3">{product.category}</td>
+                  <td className="p-3">${product.price}</td>
+                  <td className="p-3">
+                    <Link
+                      className="text-accent font-semibold"
+                      to={`/products/${product.id}`}
+                    >
+                      View
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </Layout>
   );
