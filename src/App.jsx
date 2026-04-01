@@ -19,16 +19,16 @@ function App() {
           element={user ? <ProductList /> : <Navigate to="/login" />}
         />
         <Route
-          path="/products/:id"
-          element={user ? <ProductDetail /> : <Navigate to="/login" />}
+          path="/products/edit/:id"
+          element={user ? <ProductEdit /> : <Navigate to="/login" />}
         />
         <Route
           path="/products/add"
           element={user ? <ProductAdd /> : <Navigate to="/login" />}
         />
         <Route
-          path="/products/edit/:id"
-          element={user ? <ProductEdit /> : <Navigate to="/login" />}
+          path="/products/:id"
+          element={user ? <ProductDetail /> : <Navigate to="/login" />}
         />
       </Routes>
     </BrowserRouter>

@@ -30,6 +30,8 @@ const ProductEdit = () => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+          console.log(formData);
+    
       if (!res.ok) throw new Error("Failed to update");
       navigate("/products");
     } catch (err) {

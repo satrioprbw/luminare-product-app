@@ -33,6 +33,18 @@ const ProductList = () => {
     fetchProducts();
   }, []);
 
+  const handleDelete = async (id) => {
+    try {
+      const res = await fetch(`https://dummyjson.com/products/${id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Failed to delete");
+      setProducts(products.filter((product) => product.id !== id));
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
   if (loading)
     return (
       <Layout>
@@ -87,10 +99,16 @@ const ProductList = () => {
                     </Link>
                     <Link
                       to={`/products/edit/${product.id}`}
-                      className="text-accent hover:text-light font-semibold mr-3"
+                      className="text-accent hover:text-light font-semibold"
                     >
                       Edit
                     </Link>
+                    <button
+                      onClick={() => handleDelete(product.id)}
+                      className="text-red-500 cursor-pointer hover:text-red-300"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               ))}
