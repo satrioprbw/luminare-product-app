@@ -5,6 +5,7 @@ import useAuthStore from "./store/useAuthStore";
 import ProductList from "./pages/ProductList";
 import ProductDetail from "./pages/ProductDetail";
 import ProductAdd from "./pages/ProductAdd";
+import ProductEdit from "./pages/ProductEdit";
 
 function App() {
   const user = useAuthStore((state) => state.user);
@@ -24,6 +25,10 @@ function App() {
         <Route
           path="/products/add"
           element={user ? <ProductAdd /> : <Navigate to="/login" />}
+        />
+        <Route
+          path="/products/edit/:id"
+          element={user ? <ProductEdit /> : <Navigate to="/login" />}
         />
       </Routes>
     </BrowserRouter>

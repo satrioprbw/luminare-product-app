@@ -52,7 +52,10 @@ const ProductList = () => {
       <div className="max-w-5xl mx-auto">
         <div className="flex justify-between items-center pb-8">
           <h1 className="text-2xl font-semibold text-primary">Product List</h1>
-          <Link to="/products/add" className="text-bold text-lg text-secondary">
+          <Link
+            to="/products/add"
+            className="text-bold hover:text-accent text-lg text-secondary"
+          >
             + Add New Product
           </Link>
         </div>
@@ -75,12 +78,18 @@ const ProductList = () => {
                   <td className="p-3">{product.title}</td>
                   <td className="p-3">{product.category}</td>
                   <td className="p-3">${product.price}</td>
-                  <td className="p-3">
+                  <td className="flex p-3 gap-3">
                     <Link
-                      className="text-accent font-semibold"
+                      className="text-accent hover:text-light font-semibold"
                       to={`/products/${product.id}`}
                     >
                       View
+                    </Link>
+                    <Link
+                      to={`/products/edit/${product.id}`}
+                      className="text-accent hover:text-light font-semibold mr-3"
+                    >
+                      Edit
                     </Link>
                   </td>
                 </tr>
