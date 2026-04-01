@@ -1,25 +1,26 @@
+import { Link } from "react-router-dom";
 import useAuthStore from "../store/useAuthStore";
 
 const Sidebar = () => {
   const logout = useAuthStore((state) => state.logout);
   return (
     <div className="w-50 bg-primary text-white p-5 flex flex-col">
-      <div className="mb-8 text-accent text-4xl italic">
+      <Link to="/" className="mb-8 text-accent text-4xl italic">
         <span className="text-light font-bold">Lumi</span>nare
-      </div>
+      </Link>
 
       <nav className="flex flex-col gap-4">
-        <a className="p-2 rounded hover:bg-secondary" href="/">
+        <Link className="p-2 rounded hover:bg-secondary" to="/">
           Home
-        </a>
-        <a className="p-2 rounded hover:bg-secondary" href="/products">
+        </Link>
+        <Link className="p-2 rounded hover:bg-secondary" to="/products">
           Product
-        </a>
+        </Link>
       </nav>
 
       <button
         onClick={logout}
-        className="mt-auto p-2 rounded hover:bg-secondary text-left"
+        className="cursor-pointer mt-auto p-2 rounded hover:bg-secondary text-left"
       >
         Logout
       </button>

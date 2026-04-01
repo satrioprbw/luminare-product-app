@@ -30,7 +30,6 @@ const Login = () => {
     }
     const data = await res.json();
     login(data);
-    console.log("navigating...", data);
     navigate("/");
   }
 
