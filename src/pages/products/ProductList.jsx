@@ -4,7 +4,8 @@ import useProductStore from "../../store/useProductStore";
 import { Link } from "react-router-dom";
 
 const ProductList = () => {
-  const [products, setProducts] = useState([]);
+  const products = useProductStore((state) => state.products);
+  const setProducts = useProductStore((state) => state.setProducts);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -16,6 +17,7 @@ const ProductList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
+        if (products.length > 0) return;
         const res = await fetch("https://dummyjson.com/products");
         if (!res.ok) {
           setError("Failed to Fetch Products");
