@@ -13,23 +13,23 @@ const ProductList = () => {
     product.title.toLowerCase().includes(search.toLowerCase()),
   );
 
-  const fetchProducts = async () => {
-    try {
-      const res = await fetch("https://dummyjson.com/products");
-      if (!res.ok) {
-        setError("Failed to Fetch Products");
-        return;
-      }
-      const data = await res.json();
-      setProducts(data.products);
-    } catch (err) {
-      setError(`Error: ${err.message}`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const res = await fetch("https://dummyjson.com/products");
+        if (!res.ok) {
+          setError("Failed to Fetch Products");
+          return;
+        }
+        const data = await res.json();
+        setProducts(data.products);
+      } catch (err) {
+        setError(`Error: ${err.message}`);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
     fetchProducts();
   }, []);
 
