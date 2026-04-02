@@ -1,45 +1,16 @@
-import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Layout from "../../components/Layout";
+import useProductStore from "../../store/useProductStore";
 
 const ProductDetail = () => {
   const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState("");
+  const products = useProductStore((state) => state.products);
+  const product = products.find((p) => p.id === Number(id));
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const res = await fetch(`https://dummyjson.com/products/${id}`);
-        if (!res.ok) {
-          setError("Failed to Fetch Products");
-          return;
-        }
-        const data = await res.json();
-
-        setProduct(data);
-      } catch (err) {
-        setError(`Error: ${err.message}`);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchProduct();
-  }, [id]);
-
-  if (loading)
+  if (!product)
     return (
       <Layout>
-        <p>Loading...</p>
-      </Layout>
-    );
-
-  if (error)
-    return (
-      <Layout>
-        <h1 className="text-red-600">{error}</h1>
+        <p className="text-red-600">Product not found</p>
       </Layout>
     );
   return (
