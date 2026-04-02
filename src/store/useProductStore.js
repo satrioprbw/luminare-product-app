@@ -21,6 +21,4 @@ const useProductStore = create((set) => ({
     })),
 }));
 
-useProductStore.subscribe((state) => console.log("Store updated:", state));
-
 export default useProductStore;
