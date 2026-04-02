@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 const ProductList = () => {
   const products = useProductStore((state) => state.products);
   const setProducts = useProductStore((state) => state.setProducts);
+  const deleteProduct = useProductStore((state) => state.deleteProduct);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -35,16 +36,8 @@ const ProductList = () => {
     fetchProducts();
   }, [products.length, setProducts]);
 
-  const handleDelete = async (id) => {
-    try {
-      const res = await fetch(`https://dummyjson.com/products/${id}`, {
-        method: "DELETE",
-      });
-      if (!res.ok) throw new Error("Failed to delete");
-      setProducts(products.filter((product) => product.id !== id));
-    } catch (err) {
-      console.error(err.message);
-    }
+  const handleDelete = (id) => {
+    deleteProduct(id);
   };
 
   if (loading)
