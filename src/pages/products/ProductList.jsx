@@ -33,7 +33,7 @@ const ProductList = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [products.length, setProducts]);
 
   const handleDelete = async (id) => {
     try {
