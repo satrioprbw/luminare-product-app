@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../components/Layout";
 import ProductForm from "./ProductForm";
+import useProductStore from "../../store/useProductStore";
 
 const ProductEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const products = useProductStore((state) => state.products);
+  const editProduct = useProductStore((state) => state.editProduct);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -18,13 +21,18 @@ const ProductEdit = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const res = await fetch(`https://dummyjson.com/products/${id}`);
-        if (!res.ok) {
-          setError("Failed to Fetch Product");
-          return;
+        const product = products.find((p) => p.id === Number(id));
+        if (product) {
+          setFormData(product);
+        } else {
+          const res = await fetch(`https://dummyjson.com/products/${id}`);
+          if (!res.ok) {
+            setError("Failed to Fetch Product");
+            return;
+          }
+          const data = await res.json();
+          setFormData(data);
         }
-        const data = await res.json();
-        setFormData(data);
       } catch (err) {
         setError(err.message);
       } finally {
@@ -33,7 +41,7 @@ const ProductEdit = () => {
     };
 
     fetchProduct();
-  }, [id]);
+  }, [id, products]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -54,6 +62,7 @@ const ProductEdit = () => {
       });
 
       if (!res.ok) throw new Error("Failed to update");
+      editProduct(Number(id), formData);
       navigate("/products");
     } catch (err) {
       setError(err.message);
