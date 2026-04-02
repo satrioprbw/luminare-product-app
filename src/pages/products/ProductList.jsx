@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import Layout from "../components/Layout";
-import useProductStore from "../store/useProductStore";
+import Layout from "../../components/Layout";
+import useProductStore from "../../store/useProductStore";
 import { Link } from "react-router-dom";
 
 const ProductList = () => {
@@ -29,7 +29,7 @@ const ProductList = () => {
         setLoading(false);
       }
     };
-    
+
     fetchProducts();
   }, []);
 

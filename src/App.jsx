@@ -1,10 +1,10 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import useAuthStore from "./store/useAuthStore";
-import ProductList from "./pages/ProductList";
-import ProductDetail from "./pages/ProductDetail";
-import ProductAdd from "./pages/ProductAdd";
-import ProductEdit from "./pages/ProductEdit";
+import ProductList from "./pages/products/ProductList";
+import ProductDetail from "./pages/products/ProductDetail";
+import ProductAdd from "./pages/products/ProductAdd";
+import ProductEdit from "./pages/products/ProductEdit";
 import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 
