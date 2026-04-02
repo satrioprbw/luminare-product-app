@@ -2,9 +2,11 @@ import { useState } from "react";
 import Layout from "../../components/Layout";
 import { useNavigate } from "react-router-dom";
 import ProductForm from "./ProductForm";
+import useProductStore from "../../store/useProductStore";
 
 const ProductAdd = () => {
   const navigate = useNavigate();
+  const addProduct = useProductStore((state) => state.addProduct);
   const [formData, setFormData] = useState({
     title: "",
     description: "",
@@ -28,7 +30,8 @@ const ProductAdd = () => {
         body: JSON.stringify(formData),
       });
       if (!res.ok) throw new Error("Failed to add product");
-      //   const data = await res.json();
+      const data = await res.json();
+      addProduct(data);
       navigate("/products");
     } catch (err) {
       setError(err.message);
