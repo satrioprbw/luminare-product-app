@@ -7,11 +7,13 @@ import ProductAdd from "./pages/products/ProductAdd";
 import ProductEdit from "./pages/products/ProductEdit";
 import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   const user = useAuthStore((state) => state.user);
   return (
     <BrowserRouter>
+    <Analytics />
       <Routes>
         <Route
           path="/login"
